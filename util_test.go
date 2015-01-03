@@ -4,7 +4,7 @@
 
 // This file contains tests for some of the internal functions.
 
-package main
+package stringer
 
 import (
 	"fmt"

@@ -7,7 +7,7 @@
 // it provides a way to look at the generated code without having
 // to execute the print statements in one's head.
 
-package main
+package stringer
 
 import (
 	"strings"
