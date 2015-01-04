@@ -114,9 +114,7 @@ func (g *Generator) parsePackageDir(directory string) error {
 	var names []string
 	names = append(names, pkg.GoFiles...)
 	names = append(names, pkg.CgoFiles...)
-	// TODO: Need to think about constants in test files. Maybe write type_string_test.go
-	// in a separate pass? For later.
-	// names = append(names, pkg.TestGoFiles...) // These are also in the "foo" package.
+	names = append(names, pkg.TestGoFiles...)
 	names = append(names, pkg.SFiles...)
 	names = prefixDirectory(directory, names)
 	return g.parsePackage(directory, names, nil)

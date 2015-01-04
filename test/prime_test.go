@@ -7,8 +7,12 @@
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"testing"
+)
 
+// +test stringer
 type Prime int
 
 const (
@@ -28,29 +32,29 @@ const (
 	p43 Prime = 43
 )
 
-func main() {
-	ck(0, "Prime(0)")
-	ck(1, "Prime(1)")
-	ck(p2, "p2")
-	ck(p3, "p3")
-	ck(4, "Prime(4)")
-	ck(p5, "p5")
-	ck(p7, "p7")
-	ck(p77, "p7")
-	ck(p11, "p11")
-	ck(p13, "p13")
-	ck(p17, "p17")
-	ck(p19, "p19")
-	ck(p23, "p23")
-	ck(p29, "p29")
-	ck(p37, "p37")
-	ck(p41, "p41")
-	ck(p43, "p43")
-	ck(44, "Prime(44)")
+func TestPrime(t *testing.T) {
+	ckPrime(t, 0, "Prime(0)")
+	ckPrime(t, 1, "Prime(1)")
+	ckPrime(t, p2, "p2")
+	ckPrime(t, p3, "p3")
+	ckPrime(t, 4, "Prime(4)")
+	ckPrime(t, p5, "p5")
+	ckPrime(t, p7, "p7")
+	ckPrime(t, p77, "p7")
+	ckPrime(t, p11, "p11")
+	ckPrime(t, p13, "p13")
+	ckPrime(t, p17, "p17")
+	ckPrime(t, p19, "p19")
+	ckPrime(t, p23, "p23")
+	ckPrime(t, p29, "p29")
+	ckPrime(t, p37, "p37")
+	ckPrime(t, p41, "p41")
+	ckPrime(t, p43, "p43")
+	ckPrime(t, 44, "Prime(44)")
 }
 
-func ck(prime Prime, str string) {
+func ckPrime(t *testing.T, prime Prime, str string) {
 	if fmt.Sprint(prime) != str {
-		panic("prime.go: " + str)
+		t.Errorf("expected %s, got %s", str, fmt.Sprint(prime))
 	}
 }

@@ -7,8 +7,12 @@
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"testing"
+)
 
+// +test stringer
 type Number int
 
 const (
@@ -19,16 +23,16 @@ const (
 	AnotherOne = One // Duplicate; note that AnotherOne doesn't appear below.
 )
 
-func main() {
-	ck(One, "One")
-	ck(Two, "Two")
-	ck(Three, "Three")
-	ck(AnotherOne, "One")
-	ck(127, "Number(127)")
+func TestNumber(t *testing.T) {
+	ckNumber(t, One, "One")
+	ckNumber(t, Two, "Two")
+	ckNumber(t, Three, "Three")
+	ckNumber(t, AnotherOne, "One")
+	ckNumber(t, 127, "Number(127)")
 }
 
-func ck(num Number, str string) {
+func ckNumber(t *testing.T, num Number, str string) {
 	if fmt.Sprint(num) != str {
-		panic("number.go: " + str)
+		t.Errorf("expected %s, got %s", str, fmt.Sprint(num))
 	}
 }
