@@ -15,7 +15,15 @@ Then, mark up a type in your package, for example:
 
 ```
 // +gen stringer
-type MyType int
+type Pill int
+
+const (
+	Placebo Pill = iota
+	Aspirin
+	Ibuprofen
+	Paracetamol
+	Acetaminophen = Paracetamol
+)
 ```
 
 ...and run `gen` on your package. You should see a new file named `mytype_stringer.go`. See the [gen docs](https://clipperhouse.github.io/gen/) for more information.
