@@ -63,18 +63,17 @@ import (
 	"fmt"
 	"go/ast"
 	"go/build"
+	"go/constant"
 	"go/format"
 	"go/parser"
 	"go/token"
+	"go/types"
 	"log"
 	"path/filepath"
 	"sort"
 	"strings"
 
-	"golang.org/x/tools/go/exact"
-	"golang.org/x/tools/go/types"
-
-	_ "golang.org/x/tools/go/gcimporter"
+	_ "golang.org/x/tools/go/gcimporter15"
 )
 
 // Generator holds the state of the analysis. Primarily used to buffer
@@ -371,11 +370,11 @@ func (f *File) genDecl(node ast.Node) (bool, error) {
 				return false, fmt.Errorf("can't handle non-integer constant type %s", typ)
 			}
 			value := obj.(*types.Const).Val() // Guaranteed to succeed as this is CONST.
-			if value.Kind() != exact.Int {
+			if value.Kind() != constant.Int {
 				return false, fmt.Errorf("can't happen: constant is not an integer %s", name)
 			}
-			i64, isInt := exact.Int64Val(value)
-			u64, isUint := exact.Uint64Val(value)
+			i64, isInt := constant.Int64Val(value)
+			u64, isUint := constant.Uint64Val(value)
 			if !isInt && !isUint {
 				return false, fmt.Errorf("internal error: value of %s is not an integer: %s", name, value.String())
 			}
