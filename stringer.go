@@ -72,8 +72,6 @@ import (
 	"path/filepath"
 	"sort"
 	"strings"
-
-	_ "golang.org/x/tools/go/gcimporter15"
 )
 
 // Generator holds the state of the analysis. Primarily used to buffer
